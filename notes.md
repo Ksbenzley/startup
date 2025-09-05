@@ -10,7 +10,7 @@
 
 ## Notes
 
-- [Do Not Go Gentle Into That Goodnight](doNotGoGentle.md)
+- [Do Not Go Gentle Into That Goodnight](notes/doNotGoGentle.md)
 
 This is me editing my notes.md file. From this lesson, I learned the basic of github and using repositories on my own device and others. Being able to use github fluently will make my experience of web design much easier.
 
