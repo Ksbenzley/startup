@@ -10,7 +10,9 @@
 
 ## Notes
 
-I don't know what's going on in this file but I'm adding this in to make sure everything is working smoothly. Do not go gently into that good night. Old age should burn and rave at close of day. Rage, rage against the dying of the light.
+- [Do Not Go Gentle Into That Goodnight](startup/doNotGoGentle.md)
+
+This is me editing my notes.md file. From this lesson, I learned the basic of github and using repositories on my own device and others. Being able to use github fluently will make my experience of web design much easier.
 
 ## AWS
 
