@@ -8,6 +8,10 @@
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
 
+## Notes
+
+I don't know what's going on in this file but I'm adding this in to make sure everything is working smoothly. Do not go gently into that good night. Old age should burn and rave at close of day. Rage, rage against the dying of the light.
+
 ## AWS
 
 My IP address is: 54.81.96.130
