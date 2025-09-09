@@ -32,13 +32,16 @@ Jammix will be an online site in which users can upload audio files of their ins
 
 ![Design image](jammix.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The design I'm working on will hopefully combine both audio and images to make it visually appealing. There could be a lot going on so its important to keep the User Interface as neat and uncomplicated as possible.
 
 ```mermaid
 sequenceDiagram
     actor You
     actor Website
-    You->>Website: Replace this with your design
+    You->>Website: Upload audio file
+    actor User
+    User ->>Website: upload audio file
+    Website->>Website: combining audiofiles
 ```
 
 ### Key features
