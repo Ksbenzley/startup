@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-Jammix will be an online site in which users can upload audio files of their instrument playing. Other users can then also upload their audiofiles, in a comment section type area, playing over the original upload from the root user. Then, the root user can choose to recognize another user's audio file as an official one, combining the two. For example, someone can upload an audiofile of a baseline. Then, two other users will "comment" their audiofiles of their drum lines. The bassist can then choose one of the drum lines to be the "official". Of course, you can still listen to all the uploads.
+A music social media site in which users can combine their music or add onto anothers. They can then share this music on the site and let it be discoverable by others.
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Jammix will be an online site in which users can upload audio files of their instrument playing. Other users can then also upload their audiofiles, in a comment section type area, playing over the original upload from the root user. Then, the root user can choose to recognize another user's audio file as an official one, combining the two. For example, someone can upload an audiofile of a baseline. Then, two other users will "comment" their audiofiles of their drum lines. The bassist can then choose one of the drum lines to be the "official". Of course, you can still listen to all the uploads.
 
 ### Design
 
