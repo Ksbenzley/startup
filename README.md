@@ -21,7 +21,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
 - [x] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -43,20 +43,20 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Uploading audio files
+- Mixing audio files; or combining them at the very least
+- Comment section of audio files; all public
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Basic structural and organizational elements
+- **CSS** - design, animating, UI
+- **React** - login page, audio upload
+- **Service** - login, API usage
+- **DB/Login** - User files, info
+- **WebSocket** - a new post is created by a user
 
 ## 🚀 AWS deliverable
 
