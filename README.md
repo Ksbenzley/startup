@@ -42,6 +42,8 @@ sequenceDiagram
     actor User
     User ->>Website: upload audio file
     Website->>Website: combining audiofiles
+    Website->>User: complete audio file
+    Website->>You: complete audio file
 ```
 
 ### Key features
