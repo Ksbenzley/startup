@@ -65,9 +65,9 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 AWS deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable, I learned a lot about how servers work, especially Amazon AWS servers. I learned what an elastic IP is and how they are used. I also learned about security keys and server sizes. However, there was a lot of options on the Amazon AWS page, so there is definitely more for me to learn in the future.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](http://18.213.18.69).
 
 ## 🚀 HTML deliverable
 
