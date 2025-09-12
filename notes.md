@@ -22,11 +22,11 @@ When I first created the web site through Amazon AWS, it worked. But after creat
 ## Caddy
 
 No problems, now it works just like it says in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
-I had to refresh caddy with the command: 
-'''sudo systemctl reload caddy
-journalctl -u caddy --no-pager | tail -n 50 '''
+I had to refresh caddy with the commands: 
+- sudo systemctl reload caddy
+- journalctl -u caddy --no-pager | tail -n 50
 Before this, I also had to make sure that my domain name was active in the caddy file through this command: 
-'''vi Caddyfile'''
+- vi Caddyfile
 
 ## HTML
 
