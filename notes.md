@@ -25,6 +25,7 @@ No problems, now it works just like it says in the [instruction](https://github.
 I had to refresh caddy with the commands: 
 - sudo systemctl reload caddy
 - journalctl -u caddy --no-pager | tail -n 50
+  
 Before this, I also had to make sure that my domain name was active in the caddy file through this command: 
 - vi Caddyfile
 
