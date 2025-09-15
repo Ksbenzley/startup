@@ -16,12 +16,18 @@ This is me editing my notes.md file. From this lesson, I learned the basic of gi
 
 ## AWS
 
-My IP address is: 54.81.96.130
-Launching my AMI I initially put it on a private subnet. Even though it had a public IP address and the security group was right, I wasn't able to connect to it.
+My IP address is: 18.213.18.69
+When I first created the web site through Amazon AWS, it worked. But after creating a new domain name, it had a lot of issues. The problem was this: I had to create a new inbound rule that allowed port 443 to be accessed in addition to ports 80 and 22. I also needed two new 'A' Records: jammix.click and *.jammix.click. The first is just the main website while the second is for all subnets to be able to access the website. 
 
 ## Caddy
 
-No problems worked just like it said in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+No problems, now it works just like it says in the [instruction](https://github.com/webprogramming260/.github/blob/main/profile/webServers/https/https.md).
+I had to refresh caddy with the commands: 
+- sudo systemctl reload caddy
+- journalctl -u caddy --no-pager | tail -n 50
+  
+Before this, I also had to make sure that my domain name was active in the caddy file through this command: 
+- vi Caddyfile
 
 ## HTML
 
