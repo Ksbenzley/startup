@@ -31,11 +31,17 @@ Before this, I also had to make sure that my domain name was active in the caddy
 
 ## HTML
 
-creating a link: <a href:"differentHTML.html">Visible Link</a>
+creating a link: <a href="differentHTML.html">Visible Link</a>
+<div>
+- this creates a directory almost
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
+<aside>
+- creates an "aside" which basically is like a note or fun-fact
 
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+<nav>
+- a directory where you can put other hyperlinks. Search engines look for this tag
+
+You can also use "style="..." to make the text or whatever look slightly better by changing its size and/or color.
 
 ## CSS
 
