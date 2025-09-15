@@ -32,16 +32,16 @@ Before this, I also had to make sure that my domain name was active in the caddy
 ## HTML
 
 Creating a link: 
-- <a href="differentHTML.html">Visible Link</a>
+- <a href="differentHTML.html">Visible Link
 
-<div>
+<div><br>
 - this creates a directory almost
 
-<aside>
+<aside><br>
 - creates an "aside" which basically is like a note or fun-fact
 
-<nav>
-- a directory where you can put other hyperlinks. Search engines look for this tag
+<nav><br>
+- a directory where you can put other hyperlinks. Search engines look for this tag<br>
 
 You can also use "style="..." to make the text or whatever look slightly better by changing its size and/or color.
 
