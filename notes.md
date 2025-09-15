@@ -31,7 +31,9 @@ Before this, I also had to make sure that my domain name was active in the caddy
 
 ## HTML
 
-creating a link: <a href="differentHTML.html">Visible Link</a>
+###Creating a link: 
+<a href="differentHTML.html">Visible Link</a>
+
 <div>
 - this creates a directory almost
 
