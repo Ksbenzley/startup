@@ -38,6 +38,8 @@ Commands and what they do:
 - nav: a directory where you can put other hyperlinks. Search engines look for this tag
 - style=: can be added into other commands to give the text for style like width, height, or font color
 
+<p>The Simon HTML files helped me to understand DIV better and how linking between pages works.</p>
+
 ## CSS
 
 This took a couple hours to get it how I wanted. It was important to make it responsive and Bootstrap helped with that. It looks great on all kinds of screen sizes.
