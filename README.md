@@ -75,11 +75,11 @@ For this deliverable, I learned a lot about how servers work, especially Amazon 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - I created 3 pages for the website that link to one another through HTML
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
+- [x] **Proper HTML element usage** - I completed this part of the deliverable. My whole site is made with proper HTML
 - [x] **Links** - I have a navigation bar at the bottom of the page that links to other pages in the website
-- [ ] **Text** - I did not complete this part of the deliverable.
+- [x] **Text** - I have text descriptions of each post which will be written by the user when they upload
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **Images** - Each post, along with every profile, has a corresponding image associated with it.
 - [ ] **Login placeholder** - I did not complete this part of the deliverable.
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
