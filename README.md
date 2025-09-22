@@ -74,9 +74,9 @@ For this deliverable, I learned a lot about how servers work, especially Amazon 
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **HTML pages** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I created 3 pages for the website that link to one another through HTML
 - [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **Links** - I have a navigation bar at the bottom of the page that links to other pages in the website
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
