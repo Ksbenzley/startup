@@ -78,7 +78,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Proper HTML element usage** - I completed this part of the deliverable. My whole site is made with proper HTML
 - [x] **Links** - I have a navigation bar at the bottom of the page that links to other pages in the website
 - [x] **Text** - I have text descriptions of each post which will be written by the user when they upload
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
+- [x] **3rd party API placeholder** - My API placeholder is on the create page. I'm going to use an API that allows for audio uploads.
 - [x] **Images** - Each post, along with every profile, has a corresponding image associated with it.
 - [ ] **Login placeholder** - I did not complete this part of the deliverable.
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
