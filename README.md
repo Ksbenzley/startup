@@ -82,7 +82,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Images** - Each post, along with every profile, has a corresponding image associated with it.
 - [x] **Login placeholder** - I have a login page placeholder where a user can login or create an account, which then leads to another registration page
 - [x] **DB data placeholder** - I have a placeholder on my create account page for the database where i can store login information
-- [x] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **WebSocket placeholder** - I have a placeholder in my 'comment section' part of the explore page for websocket. That way, comments will update automatically.
 
 ## 🚀 CSS deliverable
 
