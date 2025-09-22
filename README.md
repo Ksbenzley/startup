@@ -80,8 +80,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Text** - I have text descriptions of each post which will be written by the user when they upload
 - [x] **3rd party API placeholder** - My API placeholder is on the create page. I'm going to use an API that allows for audio uploads.
 - [x] **Images** - Each post, along with every profile, has a corresponding image associated with it.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - I have a login page placeholder where a user can login or create an account, which then leads to another registration page
+- [x] **DB data placeholder** - I have a placeholder on my create account page for the database where i can store login information
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
 
 ## 🚀 CSS deliverable
