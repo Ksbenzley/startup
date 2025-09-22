@@ -31,11 +31,14 @@ Before this, I also had to make sure that my domain name was active in the caddy
 
 ## HTML
 
-creating a link: <a href:"differentHTML.html">Visible Link</a>
+Commands and what they do:
+- a: creates a hyper link; must add href="linkToImage" and the link title
+- DIV: creates a sort of directory
+- aside: creates basically a note or fun-fact; something unrelated
+- nav: a directory where you can put other hyperlinks. Search engines look for this tag
+- style=: can be added into other commands to give the text for style like width, height, or font color
 
-This was easy. I was careful to use the correct structural elements such as header, footer, main, nav, and form. The links between the three views work great using the `a` element.
-
-The part I didn't like was the duplication of the header and footer code. This is messy, but it will get cleaned up when I get to React.
+<p>The Simon HTML files helped me to understand DIV better and how linking between pages works.</p>
 
 ## CSS
 
