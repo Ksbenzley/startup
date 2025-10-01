@@ -1,23 +1,36 @@
-<main>
-
-    <body>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="header">
         <h1>Jammix</h1>
         <h2>Login</h2>
+    </div>
 
-        <form>
-            <label>UserName:</label>
+    <form class="login-form">
+        <div class="form-group">
+            <label>Username:</label>
             <input type="text"><br><br>
+        </div>
+
+        <div class="form-group">
             <label>Password:</label>
             <input type="password"><br><br>
+        </div>
+
+        <div class="button-group">
             <a href="index.html">
                 <button>Log In</button>
             </a>
-        </form>
-        <a href="createAccount.html">
-            <button>Create Account</button>
-        </a>
-        <a href="index.html">
-            <button>Take me Home</button>
-        </a>
-    </body>
-</main>
+            <a href="createAccount.html">
+                <button>Create Account</button>
+            </a>
+        </div>
+    </form>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-link">Take Me Home</a><br><br>
+        <a href="https://github.com/Ksbenzley/startup.git" class="nav-link">GitHub</a>
+    </nav>
+</body>

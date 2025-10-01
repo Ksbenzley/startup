@@ -1,0 +1,139 @@
+h1{
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 100px;
+    margin: 0;
+}
+
+body {
+    background-color:#779de7;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-top: 0;
+    padding-top: 0px;
+
+    align-items: baseline;       /* align text along the bottom */
+    justify-content: flex-start; /* keep content on the left */
+    background-color: #3f5c97;  /* light gray card */
+    padding: 15px 25px;          /* space inside the card */
+    border-radius: 25px;         /* makes it slightly oval */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* soft shadow */
+    max-width: max-content;            /* optional: card width */
+    margin: 20px;
+}
+
+.header h2 {
+    color: #ffffff;
+    font-family: 'Helivetical Neue', Arial, sans-serif;
+    margin: 0;
+    padding-left: 25px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* soft shadow */
+    max-width: 400px; /* keeps it from stretching too wide */
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;  /* stack vertically */
+    gap: 15px;               /* space between fields */
+    width: 50%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;  /* label above input */
+}
+
+.login-form label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.login-form input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
+}
+
+.login-form button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+  background-color: #1e40af;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #1e40af;
+}
+
+.nav-bar {
+  display: flex;                 /* horizontal layout */
+  gap: 20px;                     /* space between links */
+  background-color: #2563eb;     /* modern blue */
+  padding: 12px 30px;            /* spacing inside navbar */
+  border-radius: 12px;           /* slightly rounded edges */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* subtle shadow */
+  font-family: 'Roboto', sans-serif;
+  max-width: max-content;
+}
+
+.nav-bar a.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px 18px;            /* clickable area */
+  border-radius: 8px;            /* rounded buttons */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-bar a.nav-link:hover {
+  background-color: #1e40af;     /* darker blue on hover */
+  transform: translateY(-2px);   /* subtle lift effect */
+}
