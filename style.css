@@ -8,6 +8,9 @@ h1{
 
 body {
     background-color:#779de7;
+    padding-left: 300px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .header {
@@ -123,6 +126,12 @@ body {
   box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* subtle shadow */
   font-family: 'Roboto', sans-serif;
   max-width: max-content;
+
+  position: fixed;               /* lock to viewport */
+  bottom: 0;                     /* stick to bottom */
+  left: 50%;                     /* center horizontally */
+  transform: translateX(-50%);   /* center */
+  z-index: 100;
 }
 
 .nav-bar a.nav-link {
@@ -136,4 +145,10 @@ body {
 .nav-bar a.nav-link:hover {
   background-color: #1e40af;     /* darker blue on hover */
   transform: translateY(-2px);   /* subtle lift effect */
+}
+
+.page-container {
+  width: 100%;
+  padding: 20px;
+  max-width: 900px;
 }
