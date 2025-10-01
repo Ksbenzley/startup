@@ -51,7 +51,8 @@ body {
     display: flex;
     flex-direction: column;  /* stack vertically */
     gap: 15px;               /* space between fields */
-    width: 50%;
+    width: 57%;
+    padding-left: 22px;
 }
 
 .form-group {
