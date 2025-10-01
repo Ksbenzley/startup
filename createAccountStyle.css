@@ -1,0 +1,29 @@
+h1{
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 100px;
+    margin: 0;
+}
+
+body {
+    background-color:#779de7;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    margin-top: 0;
+    padding-top: 0px;
+
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3f5c97;
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: max-content;
+    margin: 20px;
+}

@@ -21,13 +21,13 @@ body {
     margin-top: 0;
     padding-top: 0px;
 
-    align-items: baseline;       /* align text along the bottom */
-    justify-content: flex-start; /* keep content on the left */
-    background-color: #3f5c97;  /* light gray card */
-    padding: 15px 25px;          /* space inside the card */
-    border-radius: 25px;         /* makes it slightly oval */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* soft shadow */
-    max-width: max-content;            /* optional: card width */
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3f5c97;
+    padding: 15px 25px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: max-content;
     margin: 20px;
 }
 
@@ -103,18 +103,20 @@ body {
   margin-top: 10px;
 }
 
-.button-group button {
+.button-group a {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   padding: 10px 20px;
   border-radius: 8px;
-  border: none;
+  /*border: none;*/
   background-color: #2563eb;
   color: white;
+  text-decoration: none;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-.button-group button:hover {
+.button-group a:hover {
     background-color: #1e40af;
 }
 
