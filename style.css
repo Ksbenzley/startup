@@ -38,26 +38,17 @@ body {
     padding-left: 25px;
 }
 
-.card {
-    background: white;
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* soft shadow */
-    max-width: 400px; /* keeps it from stretching too wide */
-}
-
 .login-form {
     display: flex;
-    flex-direction: column;  /* stack vertically */
-    gap: 15px;               /* space between fields */
+    flex-direction: column;
+    gap: 15px;
     width: 57%;
     padding-left: 22px;
 }
 
 .form-group {
     display: flex;
-    flex-direction: column;  /* label above input */
+    flex-direction: column;
 }
 
 .login-form label {
@@ -79,21 +70,6 @@ body {
 .login-form input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 5px rgba(37, 99, 235, 0.3);
-}
-
-.login-form button {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.login-form button:hover {
-  background-color: #1e40af;
 }
 
 .button-group {
@@ -121,33 +97,33 @@ body {
 }
 
 .nav-bar {
-  display: flex;                 /* horizontal layout */
-  gap: 20px;                     /* space between links */
-  background-color: #2563eb;     /* modern blue */
-  padding: 12px 30px;            /* spacing inside navbar */
-  border-radius: 12px;           /* slightly rounded edges */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* subtle shadow */
+  display: flex;
+  gap: 20px;
+  background-color: #2563eb;
+  padding: 12px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   font-family: 'Roboto', sans-serif;
   max-width: max-content;
 
-  position: fixed;               /* lock to viewport */
-  bottom: 0;                     /* stick to bottom */
-  left: 50%;                     /* center horizontally */
-  transform: translateX(-50%);   /* center */
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
 }
 
 .nav-bar a.nav-link {
   color: white;
   text-decoration: none;
-  padding: 10px 18px;            /* clickable area */
-  border-radius: 8px;            /* rounded buttons */
+  padding: 10px 18px;
+  border-radius: 8px;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .nav-bar a.nav-link:hover {
-  background-color: #1e40af;     /* darker blue on hover */
-  transform: translateY(-2px);   /* subtle lift effect */
+  background-color: #1e40af;
+  transform: translateY(-2px);
 }
 
 .page-container {
