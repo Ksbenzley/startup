@@ -47,13 +47,31 @@ body {
     font-size: 1.5rem;
 }
 
+.explorePost .img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.explorePost .img-btn img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.explorePost .img-btn img:hover {
+  transform: scale(1.05);
+}
+
 .explorePost img {
     max-width: 100%;
     border-radius: 12px;
     margin: 15px 0;
 }
 
-.explorePost button {
+.explorePost button:not(.img-btn) {
     background-color: #2563eb;
     color: #ffffff;
     border: none;
@@ -65,7 +83,7 @@ body {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.explorePost button:hover {
+.explorePost button:hover:not(.img-btn) {
     background-color: #1e40af;
     transform: translateY(-2px);
 }
@@ -164,7 +182,6 @@ body {
     transform: translateY(-2px);
 }
 
-/* GitHub button link */
 a button {
     background-color: #2563eb;
     color: #fff;
