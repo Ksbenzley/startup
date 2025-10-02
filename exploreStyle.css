@@ -164,7 +164,6 @@ body {
 
 .navigator button:hover {
     background-color: #1e40af;
-    transform: translateY(-2px);
 }
 
 /* Putting comments next to post */
@@ -197,6 +196,20 @@ body {
 
 .proposalSection .comment h4 {
     margin: 5px 0;
+}
+
+.proposalSection button, .GitHub button{
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.proposalSection button:hover, .GitHub button:hover{
+    background-color: #1e40af;
 }
 
 /* Navigation bar at bottom */
