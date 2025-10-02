@@ -9,42 +9,59 @@
         <h2>userName</h2>
     </div>
 
-    <img src="placeholder.png" alt="user profile pic">
-
-    <div class="uploads">
-        <img src="placeholder.png" alt="User's chosen image to associate with their file">
-        <button type="button">This Plays the AudioFile</button>
-        <button type="button">This plays the Audio with accepted proposals</button>
-        <p> description of the post goes here...</p>
-        <div class="checklist">
-            <label>
-                Requested:
-            </label><br>
-
-            <label>
-                <input type="checkbox" name="instruments" value="Drums"> Drums
-            </label><br>
-
-            <label>
-                <input type="checkbox" name="instruments" value="Bass"> Bass
-            </label><br>
-
-            <label>
-                <input type="checkbox" name="instruments" value="Vocals"> Vocals
-            </label><br>
-
-            <label>
-                <input type="checkbox" name="instruments" value="Guitar"> Guitar
-            </label><br>
-
-            <label>
-                <input type="checkbox" name="instruments" value="Keyboard"> Keyboard
-            </label>
-        </div>
-        <button type="button">Open Proposals section</button>
+    <div class="pfp">
+        <img src="placeholder.png" alt="user profile pic">
     </div>
-    <button>Previous Post</button>
-    <button>Next Post</button>
+
+    <div class="wrapper">
+        <div class="explorePost">
+            <h3> Title of Post by userName</h3>
+
+            <div class="media-section">
+                <img src="placeholder.png" alt="User's chosen image to associate with their file">
+
+                <div class="play-buttons">
+                    <button class="img-btn">
+                        <img src="play_button2.png" alt="Play Post Audio Only">
+                    </button>
+                    <button class="img-btn">
+                        <img src="play_button.png" alt="Play All Audio">
+                    </button>
+                </div>
+            </div>
+
+            <p> description of the post goes here...</p>
+            <h4>Requests:</h4>
+            <ul>
+                <li>Drums</li>
+                <li>Guitar</li>
+                <li>Vocals</li>
+            </ul>
+            <button type="button">Proposals</button>
+        </div>
+
+        <div class="proposalSection">
+            <label>This is where websocket will come in, updating comments for the user</label>
+            <h3>  Proposals </h3>
+            <div class="comment">
+                <img src="placeholder.png" alt="commenting user's pfp">
+                <h4> Type of Proposal </h4>
+                <div class="proposalBtn">
+                    <button type="button">Play</button>
+                    <button type="button">Play with Post Audio</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigator">
+        <button type="button">Previous Post</button>
+        <button type="button">Next Post</button>
+    </div>
+
+
+
+
     <div class="navigationBar">
         <a href="explore.html" class="nav-link">Explore</a>
 

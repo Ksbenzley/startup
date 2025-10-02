@@ -61,3 +61,183 @@ body {
     background-color: #1e40af;
     transform: translateY(-2px);
 }
+
+/* Explore Post styling */
+.explorePost {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    max-width: max-content;
+}
+
+.explorePost h3 {
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.explorePost .img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.explorePost .img-btn img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.explorePost .img-btn img:hover {
+    transform: scale(1.05);
+}
+
+.media-section {
+    display: flex;
+    align-items: center;    
+    gap: 15px; 
+}
+
+.media-section img {
+    max-width: 200px;
+    border-radius: 12px;
+}
+
+.play-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.play-buttons .img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.play-buttons .img-btn img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.play-buttons .img-btn img:hover {
+    transform: scale(1.05);
+}
+
+.explorePost img {
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 15px 0;
+}
+
+.explorePost button:not(.img-btn) {
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 5px 5px 10px 0;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.explorePost button:hover:not(.img-btn) {
+    background-color: #1e40af;
+}
+
+.explorePost p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.explorePost h4 {
+    margin-top: 20px;
+}
+
+/* Requests list */
+.explorePost ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.explorePost ul li {
+    background-color: #e0e7ff;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+/* Navigator buttons */
+.navigator {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.navigator button {
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navigator button:hover {
+    background-color: #1e40af;
+}
+
+/* Putting comments next to post */
+.wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Proposal section */
+.proposalSection {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.proposalSection .comment {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.proposalSection .comment img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.proposalSection .comment h4 {
+    margin: 5px 0;
+}
+
+.proposalSection button, .GitHub button{
+    background-color: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.proposalSection button:hover, .GitHub button:hover{
+    background-color: #1e40af;
+}
