@@ -76,3 +76,13 @@ body {
 .GitHub button:hover{
     background-color: #1e40af;
 }
+
+.submitBtn button{
+    background-color: #2563eb;
+    color: #ffff;
+    border: none;
+    border-radius: 8px;
+    gap: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
