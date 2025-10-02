@@ -88,12 +88,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Every page has a header and main body. The explore page has a footer giving details about the page's creater (me).
 - [x] **Navigation elements** - At the base of each page is a navigation bar that will always stay at the base of the page for easy access.
-- [x] **Responsive to window resizing** - Items of the page will resize with an adjusted window
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Responsive to window resizing** - Items of the page will resize with an adjusted window.
+- [x] **Application elements** - Elements were designed to make the UI easy to use for a new user.
+- [x] **Application text content** - Text was designed to be easy to read and locate.
+- [x] **Application images** - Images are used as buttons and each post has an image built into it. More specific images will replace the current placeholders when functionality is added to the site.
 
 ## 🚀 React part 1: Routing deliverable
 
