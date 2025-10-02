@@ -242,6 +242,10 @@ body {
     transform: translateY(-2px);
 }
 
+footer {
+    flex: 0 30px;
+}
+
 
 footer p{
     display: flex;
@@ -250,8 +254,8 @@ footer p{
     justify-content: flex-start;
     background-color: #3f5c97;
     padding: 15px 25px;
-    border-radius: 25px;
-    max-width: max-content;
-    margin-bottom: 30px;
+    /*border-radius: 25px;*/
+    max-width: max;
+    
 
 }
