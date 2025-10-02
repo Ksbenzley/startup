@@ -55,14 +55,50 @@ body {
 }
 
 .explorePost .img-btn img {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-  transition: transform 0.2s ease;
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
 }
 
 .explorePost .img-btn img:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.media-section {
+    display: flex;
+    align-items: center;    
+    gap: 15px; 
+}
+
+.media-section img {
+    max-width: 200px;
+    border-radius: 12px;
+}
+
+.play-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.play-buttons .img-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.play-buttons .img-btn img {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.play-buttons .img-btn img:hover {
+    transform: scale(1.05);
 }
 
 .explorePost img {
