@@ -241,3 +241,17 @@ body {
 .proposalSection button:hover, .GitHub button:hover{
     background-color: #1e40af;
 }
+
+.pfp {
+    position: absolute;
+    top: 20px;
+    right: 20px;    
+}
+
+.pfp img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
