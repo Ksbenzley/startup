@@ -241,3 +241,17 @@ body {
     background-color: #1e40af;
     transform: translateY(-2px);
 }
+
+
+footer p{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3f5c97;
+    padding: 15px 25px;
+    border-radius: 25px;
+    max-width: max-content;
+    margin-bottom: 30px;
+
+}
