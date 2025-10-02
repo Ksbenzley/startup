@@ -179,7 +179,6 @@ body {
     background-color: #ffffff;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-bottom: 30px;
 }
 
@@ -218,14 +217,14 @@ body {
 }
 
 .navigationBar a.nav-link {
-  color: white;
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .navigationBar a.nav-link:hover {
-  background-color: #1e40af;
-  transform: translateY(-2px);
+    background-color: #1e40af;
+    transform: translateY(-2px);
 }
