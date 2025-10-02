@@ -1,15 +1,13 @@
 <main>
 <header>
-
+    <link href="profileStyle.css" rel="stylesheet">
 </header>
 
 <body>
-    <h1>Jammix</h1>
-    <h2>userName</h2>
-
-    <a href="index.html">
-        <button>Log In</button>
-    </a>
+    <div class="header">
+        <h1>Jammix</h1>
+        <h2>userName</h2>
+    </div>
 
     <img src="placeholder.png" alt="user profile pic">
 
@@ -18,26 +16,43 @@
         <button type="button">This Plays the AudioFile</button>
         <button type="button">This plays the Audio with accepted proposals</button>
         <p> description of the post goes here...</p>
-        <h4>Requests (add blue or red checkmark for accepted or not)</h4>
-        <ul>
-            <li>Drums</li>
-            <li>Guitar</li>
-            <li>Vocals</li>
-        </ul>
+        <div class="checklist">
+            <label>
+                Requested:
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="instruments" value="Drums"> Drums
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="instruments" value="Bass"> Bass
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="instruments" value="Vocals"> Vocals
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="instruments" value="Guitar"> Guitar
+            </label><br>
+
+            <label>
+                <input type="checkbox" name="instruments" value="Keyboard"> Keyboard
+            </label>
+        </div>
         <button type="button">Open Proposals section</button>
     </div>
     <button>Previous Post</button>
     <button>Next Post</button>
     <div class="navigationBar">
-        <a href="explore.html">
-            <button type="button">Explore</button>
-        </a>
-        <a href="create.html">
-            <button type="button">Create</button>
-        </a>
-        <a href="profile.html">
-            <button type="button">Profile</button>
-        </a>
+        <a href="explore.html" class="nav-link">Explore</a>
+
+        <a href="create.html" class="nav-link">Create</a>
+            
+        <a href="profile.html" class="nav-link">Profile</a>
+            
+        <a href="index.html" class="nav-link">Login</a>
     </div>
     <br><br>
 
