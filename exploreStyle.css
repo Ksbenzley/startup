@@ -167,6 +167,13 @@ body {
     transform: translateY(-2px);
 }
 
+/* Putting comments next to post */
+.wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
 /* Proposal section */
 .proposalSection {
     background-color: #ffffff;
