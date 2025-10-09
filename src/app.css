@@ -1,5 +1,50 @@
-.body {
-  display: flex;
-  flex-direction: column;
-  min-width: 375px;
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3f5c97;
+    padding: 15px 25px;
+    border-radius: 25px;
+    max-width: max-content;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-weight: 600;
+    font-size: 80px;
+    margin: 0;
+}
+
+.header h2 {
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding-left: 25px;
+}
+
+body {
+    background-color: #779de7;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 20px;
+    margin: 0;
+}
+
+footer {
+    flex: 0 30px;
+}
+
+footer p{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+    background-color: #3f5c97;
+    padding: 15px 25px;
+    /*border-radius: 25px;*/
+    max-width: max;
+    
+
 }
