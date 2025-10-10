@@ -44,6 +44,9 @@ function AppContent() {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/profile">Profile</NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/">Log Out</NavLink>
+              </li>
             </menu>
           </nav>
         )}

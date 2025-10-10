@@ -19,6 +19,7 @@ export function Login() {
               <div className="button-group">
                   <NavLink to="/" className="nav-link">Log In</NavLink>
                   <NavLink to="/createAccount" className="nav-link">Create Account</NavLink>
+                  <NavLink to="/create" className="nav-link">Take Me Home</NavLink>
               </div>
           </form>
     </main>
