@@ -3,6 +3,7 @@ import './style.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
 export function Login() {
+
   return (
     <div className="loginBody">
     <main className="page-container">
@@ -20,10 +21,6 @@ export function Login() {
                   <NavLink to="/createAccount" className="nav-link">Create Account</NavLink>
               </div>
           </form>
-
-          {/*<nav className="nav-bar">
-              <NavLink to="/explore" className="nav-link">Take Me Home</NavLink><br/><br/>
-          </nav>*/}
     </main>
     </div>
   );
