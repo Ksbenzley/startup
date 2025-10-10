@@ -1,8 +1,10 @@
 import React from 'react';
 import './style.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 
 export function Login() {
   return (
+    <div className="loginBody">
     <main className="page-container">
         <form className="login-form">
               <div className="form-group">
@@ -19,9 +21,10 @@ export function Login() {
               </div>
           </form>
 
-          <nav className="nav-bar">
+          {/*<nav className="nav-bar">
               <NavLink to="/explore" className="nav-link">Take Me Home</NavLink><br/><br/>
-          </nav>
+          </nav>*/}
     </main>
+    </div>
   );
 }

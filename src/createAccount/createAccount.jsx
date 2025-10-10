@@ -1,7 +1,7 @@
 import React from 'react';
 import './createAccountStyle.css';
 
-export function createAccount() {
+export function CreateAccount() {
   return (
     <main>
       <form className="signup-form">

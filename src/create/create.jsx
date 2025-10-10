@@ -40,7 +40,7 @@ export function Create() {
                 <input type="checkbox" name="instruments" value="Keyboard" /> Keyboard
             </label>
         </div>
-        <div class="submitBtn">
+        <div className="submitBtn">
             <br/>
             <button>Create/Post</button>
         </div>
