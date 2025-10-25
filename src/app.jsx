@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { AuthState } from './login/authState';
+import {
+  BrowserRouter,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
-import { BrowserRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { Create } from './create/create';
 import { CreateAccount } from './createAccount/createAccount';
 import { Explore } from './explore/explore';
@@ -19,49 +27,96 @@ export default function App() {
 
 function AppContent() {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || '');
+  const [authState, setAuthState] = useState(
+    userName ? AuthState.Authenticated : AuthState.Unauthenticated
+  );
+
+  const [posts, setPosts] = useState([]); // New: store posts
+
   const hideNavPages = ['/', '/createAccount']; // pages where nav is hidden
   const shouldHideNav = hideNavPages.includes(location.pathname);
 
+  const onAuthChange = (user, newAuthState) => {
+    setUserName(user);
+    setAuthState(newAuthState);
+
+    if (newAuthState === AuthState.Authenticated) {
+      localStorage.setItem('userName', user);
+      navigate('/explore');
+    } else {
+      localStorage.removeItem('userName');
+      navigate('/');
+    }
+  };
+
+  // New: function to add a post
+  const addPost = (newPost) => {
+    setPosts([...posts, newPost]);
+    navigate('/profile'); // optional: go to profile after posting
+  };
+
   return (
     <div>
-      {/* Header is ALWAYS shown */}
+      {/* Header */}
       <header className="container-fluid">
         <div className="header">
-          <h1> Jammix </h1>
-          <h2> Explore </h2>
+          <h1>Jammix</h1>
+          <h2>Explore</h2>
         </div>
 
-        {/* Nav is shown ONLY if NOT on login or create account page */}
         {!shouldHideNav && (
           <nav className="navigationBar">
             <menu className="navbar-nav d-flex flex-row gap-3">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/explore">Explore</NavLink>
+                <NavLink className="nav-link" to="/explore">
+                  Explore
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/create">Create</NavLink>
+                <NavLink className="nav-link" to="/create">
+                  Create
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                <NavLink className="nav-link" to="/profile">
+                  Profile
+                </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">Log Out</NavLink>
+                <NavLink
+                  className="nav-link"
+                  to="/"
+                  onClick={() => onAuthChange('', AuthState.Unauthenticated)}
+                >
+                  Log Out
+                </NavLink>
               </li>
             </menu>
           </nav>
         )}
       </header>
 
+      {/* Routes */}
       <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/createAccount' element={<CreateAccount />} />
-        <Route path='/explore' element={<Explore />} />
-        <Route path='/create' element={<Create />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='*' element={<NotFound />} />
+        <Route
+          path="/"
+          element={
+            <Login userName={userName} authState={authState} onAuthChange={onAuthChange} />
+          }
+        />
+        <Route
+          path="/createAccount"
+          element={<CreateAccount onAuthChange={onAuthChange} />}
+        />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/create" element={<Create onNewPost={addPost} />} />
+        <Route path="/profile" element={<Profile posts={posts} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {/* Footer is hidden on login and create account pages */}
       {!shouldHideNav && (
         <footer>
           <div className="GitHub">
