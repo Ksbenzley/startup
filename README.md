@@ -107,8 +107,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **All functionality implemented or mocked out** - 
-- [x] **Hooks** - 
+- [x] **All functionality implemented or mocked out** - You can now login and create posts. The posts will show up on your profile.
+- [x] **Hooks** - Use hooks to track the current user and to navigate the site properly
 
 ## 🚀 Service deliverable
 
