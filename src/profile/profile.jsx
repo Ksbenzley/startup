@@ -66,10 +66,6 @@ export function Profile({ posts }) {
         </div>
       </div>
 
-      <div className="navigator">
-        <button type="button">Previous Post</button>
-        <button type="button">Next Post</button>
-      </div>
     </main>
   );
 }
