@@ -6,7 +6,8 @@
     background-color: #3f5c97;
     padding: 15px 25px;
     border-radius: 25px;
-    max-width: max-content;
+    width: 100%;
+    box-sizing: border-box;
     margin-bottom: 30px;
 }
 
@@ -28,12 +29,14 @@
 body {
     background-color: #779de7;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    padding: 20px;
+    padding: 0;
     margin: 0;
 }
 
 footer {
     flex: 0 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 footer p{
@@ -43,8 +46,6 @@ footer p{
     justify-content: flex-start;
     background-color: #3f5c97;
     padding: 15px 25px;
-    /*border-radius: 25px;*/
-    max-width: max;
-    
-
+    width: 100%;
+    box-sizing: border-box;
 }
