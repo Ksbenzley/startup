@@ -10,6 +10,7 @@ export function Profile({ posts }) {
         </div>
 
       <div className="wrapper">
+        <div className="posts-container">
         {posts.length === 0 ? (
           <p>No posts yet. Create one!</p>
         ) : (
@@ -48,6 +49,7 @@ export function Profile({ posts }) {
             </div>
           ))
         )}
+        </div>
 
         {/* Placeholder for proposals section */}
         <div className="proposalSection">
