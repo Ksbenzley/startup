@@ -34,15 +34,6 @@ function AppContent() {
     userName ? AuthState.Authenticated : AuthState.Unauthenticated
   );
   const [posts, setPosts] = useState([]); // New: store posts
-  const [quote, setQuote] = useState('');
-
-  useEffect(() => {
-  fetch('https://api.breakingbadquotes.xyz/v1/quotes')
-    .then(res => res.json())
-    .then(data => setQuote(data[0].quote))
-    .catch(err => console.error('Error fetching quote:', err));
-}, []);
-
 
   const hideNavPages = ['/', '/createAccount']; // pages where nav is hidden
   const shouldHideNav = hideNavPages.includes(location.pathname);
@@ -74,13 +65,6 @@ function AppContent() {
           <h1>Jammix</h1>
           <h2>Explore</h2>
         </div>
-
-        {quote && (
-  <p className="text-center mt-3">
-    “{quote}”
-  </p>
-)}
-
 
         {!shouldHideNav && (
           <nav className="navigationBar">
