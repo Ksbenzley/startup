@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './exploreStyle.css';
 
 export function Explore({ posts }) {
   const [songOfTheDay, setSongOfTheDay] = useState(null);
 
-  // Fetch Song of the Day on mount
   useEffect(() => {
     const randomArtists = [
       'Coldplay',
@@ -19,11 +18,9 @@ export function Explore({ posts }) {
     ];
     const randomArtist = randomArtists[Math.floor(Math.random() * randomArtists.length)];
 
-    fetch(
-      `https://itunes.apple.com/search?term=${encodeURIComponent(randomArtist)}&limit=10&entity=song`
-    )
-      .then((res) => res.json())
-      .then((data) => {
+    fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(randomArtist)}&limit=10&entity=song`)
+      .then(res => res.json())
+      .then(data => {
         const results = data.results;
         if (results && results.length > 0) {
           const randomTrack = results[Math.floor(Math.random() * results.length)];
@@ -36,12 +33,11 @@ export function Explore({ posts }) {
           setSongOfTheDay({ title: 'No song found', artist: '-', albumArt: null });
         }
       })
-      .catch((err) => console.error('Error fetching song of the day:', err));
+      .catch(err => console.error('Error fetching song of the day:', err));
   }, []);
 
   return (
     <main>
-      {/* Song of the Day */}
       {songOfTheDay && (
         <div className="text-center mt-3">
           <p>
@@ -58,62 +54,31 @@ export function Explore({ posts }) {
       )}
 
       <div className="wrapper">
-        {/* Posts Section */}
         {posts && posts.length > 0 ? (
           posts.map((post, index) => (
-            <div className="explorePost" key={index}>
-              <h3>
-                {post.title} by {post.userName}
-              </h3>
-
-              <div className="media-section">
-                <img src={post.image || 'placeholder.png'} alt="Post media" />
-                <div className="play-buttons">
-                  <button className="img-btn">
-                    <img src="play_button2.png" alt="Play Post Audio Only" />
-                  </button>
-                  <button className="img-btn">
-                    <img src="play_button.png" alt="Play All Audio" />
-                  </button>
-                </div>
-              </div>
-
+            <div key={index} className="explorePost">
+              <h3>{post.title} by {post.userName}</h3>
+              {post.image && <img src={post.image} alt={`${post.title} cover`} />}
+              {post.audio && (
+                <audio controls>
+                  <source src={post.audio} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+              )}
               <p>{post.description}</p>
-
-              <h4>Requests:</h4>
-              <ul>
-                {post.requests && post.requests.length > 0
-                  ? post.requests.map((req, i) => <li key={i}>{req}</li>)
-                  : null}
-              </ul>
-
-              <button type="button">Proposals</button>
-
-              {/* Proposals for each post */}
-              <div className="proposalSection">
-                {post.proposals &&
-                  post.proposals.map((proposal, i) => (
-                    <div className="comment" key={i}>
-                      <img src={proposal.userPfp || 'placeholder.png'} alt="comment user" />
-                      <h4>{proposal.type}</h4>
-                      <div className="proposalBtn">
-                        <button type="button">Play</button>
-                        <button type="button">Play with Post Audio</button>
-                      </div>
-                    </div>
-                  ))}
-              </div>
+              {post.requests && post.requests.length > 0 && (
+                <>
+                  <h4>Requests:</h4>
+                  <ul>
+                    {post.requests.map((instr, i) => <li key={i}>{instr}</li>)}
+                  </ul>
+                </>
+              )}
             </div>
           ))
         ) : (
-          <p className="text-center">No posts to display</p>
+          <p>No posts yet.</p>
         )}
-      </div>
-
-      {/* Navigation Buttons */}
-      <div className="navigator">
-        <button type="button">Previous Post</button>
-        <button type="button">Next Post</button>
       </div>
     </main>
   );

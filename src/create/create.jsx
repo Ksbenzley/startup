@@ -1,64 +1,102 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './createStyle.css';
 
-export function Create({ onNewPost }) {
+export function Create({ onNewPost, userName }) {
   const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
-  const [description, setDescription] = useState('');
-  const [instruments, setInstruments] = useState([]);
+  const [requests, setRequests] = useState([]);
+
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setInstruments([...instruments, value]);
+      setRequests([...requests, value]);
     } else {
-      setInstruments(instruments.filter((i) => i !== value));
+      setRequests(requests.filter((r) => r !== value));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPost = { title, imageFile, audioFile, description, instruments };
-    console.log('Creating post:', newPost);
 
-    // Call a parent function to store this post (or send to backend)
-    if (onNewPost) {
-      onNewPost(newPost);
-    }
+    // Create URLs for uploaded files so they can be displayed
+    const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
+    const audioUrl = audioFile ? URL.createObjectURL(audioFile) : null;
+
+    const newPost = {
+      title,
+      description,
+      userName,
+      image: imageUrl,
+      audio: audioUrl,
+      requests,
+      proposals: [],
+    };
+
+    // Add the post to App.jsx
+    if (onNewPost) onNewPost(newPost);
 
     // Reset form
     setTitle('');
+    setDescription('');
     setImageFile(null);
     setAudioFile(null);
-    setDescription('');
-    setInstruments([]);
+    setRequests([]);
+
+    // Navigate to explore after creating post
+    navigate('/explore');
   };
 
-   return (
+  return (
     <main>
       <div className="newPostMaker">
         <form className="inputs" onSubmit={handleSubmit}>
           <label>Title</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /><br /><br />
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <br /><br />
 
           <label>Post Image</label>
-          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} /><br /><br />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImageFile(e.target.files[0])}
+          />
+          <br /><br />
 
           <label>Audio Upload</label>
-          <input type="file" accept="audio/*" onChange={(e) => setAudioFile(e.target.files[0])} /><br /><br />
+          <input
+            type="file"
+            accept="audio/*"
+            onChange={(e) => setAudioFile(e.target.files[0])}
+          />
+          <br /><br />
 
-          <label>Text Description</label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} /><br /><br />
+          <label>Description</label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows="3"
+            required
+          />
+          <br /><br />
 
           <div className="checklist">
-            <label>Requested:</label><br />
+            <label>Requests:</label><br />
             {['Drums', 'Bass', 'Vocals', 'Guitar', 'Keyboard'].map((instr) => (
               <label key={instr}>
                 <input
                   type="checkbox"
                   value={instr}
-                  checked={instruments.includes(instr)}
+                  checked={requests.includes(instr)}
                   onChange={handleCheckboxChange}
                 />{' '}
                 {instr}
@@ -68,7 +106,7 @@ export function Create({ onNewPost }) {
 
           <div className="submitBtn">
             <br />
-            <button type="submit">Create/Post</button>
+            <button type="submit">Create / Post</button>
           </div>
         </form>
       </div>

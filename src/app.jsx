@@ -110,11 +110,12 @@ function AppContent() {
           path="/createAccount"
           element={<CreateAccount onAuthChange={onAuthChange} />}
         />
-        <Route path="/explore" element={<Explore />} />
+        <Route path="/explore" element={<Explore posts={posts} />} />
         <Route path="/create" element={<Create onNewPost={addPost} />} />
-        <Route path="/profile" element={<Profile posts={posts} />} />
+        <Route path="/profile" element={<Profile posts={posts} userName={userName} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
 
       {!shouldHideNav && (
         <footer>
