@@ -1,54 +1,44 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './createStyle.css';
 
-export function Create({ onNewPost, userName }) {
+export function Create({ onNewPost, currentUserName }) {
   const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
-  const [requests, setRequests] = useState([]);
-
-  const navigate = useNavigate();
+  const [description, setDescription] = useState('');
+  const [instruments, setInstruments] = useState([]);
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
     if (checked) {
-      setRequests([...requests, value]);
+      setInstruments([...instruments, value]);
     } else {
-      setRequests(requests.filter((r) => r !== value));
+      setInstruments(instruments.filter((i) => i !== value));
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create URLs for uploaded files so they can be displayed
-    const imageUrl = imageFile ? URL.createObjectURL(imageFile) : null;
-    const audioUrl = audioFile ? URL.createObjectURL(audioFile) : null;
-
     const newPost = {
       title,
+      imageFile,
+      audioFile,
       description,
-      userName,
-      image: imageUrl,
-      audio: audioUrl,
-      requests,
-      proposals: [],
+      instruments,
+      userName: currentUserName,
     };
 
-    // Add the post to App.jsx
-    if (onNewPost) onNewPost(newPost);
+    if (onNewPost) {
+      onNewPost(newPost);
+    }
 
     // Reset form
     setTitle('');
-    setDescription('');
     setImageFile(null);
     setAudioFile(null);
-    setRequests([]);
-
-    // Navigate to explore after creating post
-    navigate('/explore');
+    setDescription('');
+    setInstruments([]);
   };
 
   return (
@@ -56,47 +46,25 @@ export function Create({ onNewPost, userName }) {
       <div className="newPostMaker">
         <form className="inputs" onSubmit={handleSubmit}>
           <label>Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <br /><br />
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} /><br /><br />
 
           <label>Post Image</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImageFile(e.target.files[0])}
-          />
-          <br /><br />
+          <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} /><br /><br />
 
           <label>Audio Upload</label>
-          <input
-            type="file"
-            accept="audio/*"
-            onChange={(e) => setAudioFile(e.target.files[0])}
-          />
-          <br /><br />
+          <input type="file" accept="audio/*" onChange={(e) => setAudioFile(e.target.files[0])} /><br /><br />
 
-          <label>Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows="3"
-            required
-          />
-          <br /><br />
+          <label>Text Description</label>
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} /><br /><br />
 
           <div className="checklist">
-            <label>Requests:</label><br />
+            <label>Requested Instruments:</label><br />
             {['Drums', 'Bass', 'Vocals', 'Guitar', 'Keyboard'].map((instr) => (
               <label key={instr}>
                 <input
                   type="checkbox"
                   value={instr}
-                  checked={requests.includes(instr)}
+                  checked={instruments.includes(instr)}
                   onChange={handleCheckboxChange}
                 />{' '}
                 {instr}
@@ -106,61 +74,10 @@ export function Create({ onNewPost, userName }) {
 
           <div className="submitBtn">
             <br />
-            <button type="submit">Create / Post</button>
+            <button type="submit">Create/Post</button>
           </div>
         </form>
       </div>
     </main>
   );
 }
-
-
-
-// export function Create() {
-//   return (
-//     <main>
-//       <div className="newPostMaker">
-//         <form className="inputs">
-//             <label for="post">Title</label>
-//             <input type="text" id="post" name="post" /><br/><br/>
-//             <label for="post">Post Image</label>
-//             <input type="file" id="post" name="post" accept="image/*"/><br/><br/>
-//             <label for="post">Audio Upload</label>
-//             <input type="file" id="post" name="post" accept="audio/*"/><br/><br/>
-//             <label for="post">Text Description</label>
-//             <input type="text" id="post" name="post" /><br/><br/>
-//         </form>
-//         <div className="checklist">
-//             <label>
-//                 Requested:
-//             </label><br/>
-
-//             <label>
-//                 <input type="checkbox" name="instruments" value="Drums" /> Drums
-//             </label><br/>
-
-//             <label>
-//                 <input type="checkbox" name="instruments" value="Bass" /> Bass
-//             </label><br/>
-
-//             <label>
-//                 <input type="checkbox" name="instruments" value="Vocals" /> Vocals
-//             </label><br/>
-
-//             <label>
-//                 <input type="checkbox" name="instruments" value="Guitar" /> Guitar
-//             </label><br/>
-
-//             <label>
-//                 <input type="checkbox" name="instruments" value="Keyboard" /> Keyboard
-//             </label>
-//         </div>
-//         <div className="submitBtn">
-//             <br/>
-//             <button>Create/Post</button>
-//         </div>
-//     </div>
-
-//     </main>
-//   );
-// }

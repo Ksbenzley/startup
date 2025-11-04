@@ -54,31 +54,16 @@ export function Explore({ posts }) {
       )}
 
       <div className="wrapper">
-        {posts && posts.length > 0 ? (
-          posts.map((post, index) => (
-            <div key={index} className="explorePost">
-              <h3>{post.title} by {post.userName}</h3>
-              {post.image && <img src={post.image} alt={`${post.title} cover`} />}
-              {post.audio && (
-                <audio controls>
-                  <source src={post.audio} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              )}
-              <p>{post.description}</p>
-              {post.requests && post.requests.length > 0 && (
-                <>
-                  <h4>Requests:</h4>
-                  <ul>
-                    {post.requests.map((instr, i) => <li key={i}>{instr}</li>)}
-                  </ul>
-                </>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No posts yet.</p>
-        )}
+        {posts.map((post, index) => (
+          <div key={index} className="explorePost">
+            <h3>{post.title} by {post.userName}</h3>
+            {post.imageFile && <img src={URL.createObjectURL(post.imageFile)} alt={post.title} />}
+            {post.audioFile && <audio controls src={URL.createObjectURL(post.audioFile)} />}
+            <p>{post.description}</p>
+            <h4>Requests:</h4>
+            <ul>{post.instruments?.map(instr => <li key={instr}>{instr}</li>)}</ul>
+          </div>
+        ))}
       </div>
     </main>
   );
