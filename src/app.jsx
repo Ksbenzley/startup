@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { AuthState } from './login/authState';
@@ -9,6 +9,7 @@ import {
   Routes,
   useLocation,
   useNavigate,
+  Navigate,
 } from 'react-router-dom';
 
 import { Create } from './create/create';
@@ -16,6 +17,14 @@ import { CreateAccount } from './createAccount/createAccount';
 import { Explore } from './explore/explore';
 import { Login } from './login/login';
 import { Profile } from './profile/profile';
+
+// Single ProtectedRoute declaration
+function ProtectedRoute({ authState, children }) {
+  if (authState !== AuthState.Authenticated) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
+}
 
 export default function App() {
   return (
@@ -33,9 +42,9 @@ function AppContent() {
   const [authState, setAuthState] = useState(
     userName ? AuthState.Authenticated : AuthState.Unauthenticated
   );
-  const [posts, setPosts] = useState([]); // New: store posts
+  const [posts, setPosts] = useState([]);
 
-  const hideNavPages = ['/', '/createAccount']; // pages where nav is hidden
+  const hideNavPages = ['/', '/createAccount'];
   const shouldHideNav = hideNavPages.includes(location.pathname);
 
   const onAuthChange = (user, newAuthState) => {
@@ -55,9 +64,7 @@ function AppContent() {
     try {
       const res = await fetch('/api/logout', { method: 'POST' });
       if (res.ok) {
-        // Clear frontend state
         onAuthChange('', AuthState.Unauthenticated);
-        alert('Logged out successfully!');
       } else {
         console.error('Logout failed');
         alert('Logout failed');
@@ -68,16 +75,13 @@ function AppContent() {
     }
   };
 
-
-  // New: function to add a post
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
-    navigate('/profile'); // optional: go to profile after posting
+    navigate('/profile');
   };
 
   return (
     <div>
-      {/* Header */}
       <header className="container-fluid">
         <div className="header">
           <h1>Jammix</h1>
@@ -119,24 +123,38 @@ function AppContent() {
         )}
       </header>
 
-      {/* Routes */}
       <Routes>
         <Route
           path="/"
+          element={<Login userName={userName} authState={authState} onAuthChange={onAuthChange} />}
+        />
+        <Route path="/createAccount" element={<CreateAccount onAuthChange={onAuthChange} />} />
+        <Route
+          path="/explore"
           element={
-            <Login userName={userName} authState={authState} onAuthChange={onAuthChange} />
+            <ProtectedRoute authState={authState}>
+              <Explore posts={posts} />
+            </ProtectedRoute>
           }
         />
         <Route
-          path="/createAccount"
-          element={<CreateAccount onAuthChange={onAuthChange} />}
+          path="/create"
+          element={
+            <ProtectedRoute authState={authState}>
+              <Create onNewPost={addPost} currentUserName={userName} />
+            </ProtectedRoute>
+          }
         />
-        <Route path="/explore" element={<Explore posts={posts} />} />
-        <Route path="/create" element={<Create onNewPost={addPost} currentUserName={userName} />} />
-        <Route path="/profile" element={<Profile posts={posts} userName={userName} />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute authState={authState}>
+              <Profile posts={posts} userName={userName} />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
-
 
       {!shouldHideNav && (
         <footer>

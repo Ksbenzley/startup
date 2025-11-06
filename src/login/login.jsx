@@ -104,7 +104,6 @@ export function Login({ onAuthChange }) {
           <div className="button-group">
             <button type="submit" className="nav-link">Log In</button>
             <NavLink to="/createAccount" className="nav-link">Create Account</NavLink>
-            <NavLink to="/create" className="nav-link">Take Me Home</NavLink>
           </div>
         </form>
       </main>

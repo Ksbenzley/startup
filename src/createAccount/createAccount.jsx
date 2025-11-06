@@ -10,39 +10,41 @@ export function CreateAccount({ onAuthChange }) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleCreate = async (e) => {
-    e.preventDefault();
+const handleCreate = async (e) => {
+  e.preventDefault();
 
-    if (password !== reenter) {
-      setError('Passwords do not match!');
-      return;
-    }
+  if (password !== reenter) {
+    setError('Passwords do not match!');
+    return;
+  }
 
-    if (!username || !password) {
-      setError('Please fill out all fields.');
-      return;
-    }
+  if (!username || !password) {
+    setError('Please fill out all fields.');
+    return;
+  }
 
-    try {
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
+  try {
+    // Call your backend API to register
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
 
+    if (res.ok) {
+      // Redirect to login page without authenticating yet
+      alert('Account created successfully! Please log in.');
+      window.location.href = '/'; // or use navigate('/') if using useNavigate
+    } else {
       const data = await res.json();
-
-      if (res.ok) {
-        alert('Account created successfully! You can now log in.');
-        navigate('/login'); // go to login page
-      } else {
-        setError(data.error || 'Registration failed');
-      }
-    } catch (err) {
-      console.error('Error connecting to backend:', err);
-      setError('Error connecting to server');
+      setError(data.error || 'Registration failed');
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setError('Error connecting to server');
+  }
+};
+
 
   return (
     <main>
