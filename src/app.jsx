@@ -51,6 +51,24 @@ function AppContent() {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch('/api/logout', { method: 'POST' });
+      if (res.ok) {
+        // Clear frontend state
+        onAuthChange('', AuthState.Unauthenticated);
+        alert('Logged out successfully!');
+      } else {
+        console.error('Logout failed');
+        alert('Logout failed');
+      }
+    } catch (err) {
+      console.error('Error connecting to backend:', err);
+      alert('Error connecting to server');
+    }
+  };
+
+
   // New: function to add a post
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -88,7 +106,10 @@ function AppContent() {
                 <NavLink
                   className="nav-link"
                   to="/"
-                  onClick={() => onAuthChange('', AuthState.Unauthenticated)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleLogout();
+                  }}
                 >
                   Log Out
                 </NavLink>
