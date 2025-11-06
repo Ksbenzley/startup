@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './createAccountStyle.css';
 import { AuthState } from '../login/authState';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateAccount({ onAuthChange }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [reenter, setReenter] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleCreate = (e) => {
+  const handleCreate = async (e) => {
     e.preventDefault();
 
     if (password !== reenter) {
@@ -21,10 +23,25 @@ export function CreateAccount({ onAuthChange }) {
       return;
     }
 
-    localStorage.setItem('username', username);
-    localStorage.setItem('password', password);
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
-    onAuthChange(username, AuthState.Authenticated);
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Account created successfully! You can now log in.');
+        navigate('/login'); // go to login page
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      console.error('Error connecting to backend:', err);
+      setError('Error connecting to server');
+    }
   };
 
   return (
