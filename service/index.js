@@ -10,6 +10,11 @@ app.use(cookieParser());      // Parse cookies
 
 const port = 4000;            // Default port
 
+// Serve up the front-end static content hosting
+app.use(express.static('public'));
+
+
+
 // In-memory storage (Step 1)
 const users = []; // Stores registered users
 const posts = []; // Stores posts
@@ -109,6 +114,10 @@ app.get('/api/secret', (req, res) => {
   res.json({ message: `Welcome, ${user.username}! This is a secret.` });
 });
 
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
 
 // Start server
 app.listen(port, () => {
