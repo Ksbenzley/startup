@@ -1,6 +1,7 @@
 {
   "name": "startup",
   "version": "1.0.0",
+  "type": "module",
   "description": "[My Notes](notes.md)",
   "main": "index.js",
   "scripts": {
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/Ksbenzley/startup#readme",
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
     "vite": "^7.1.9"
   },
   "dependencies": {

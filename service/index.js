@@ -1,27 +1,50 @@
-const express = require('express');
-const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
+// service/index.js
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
-app.use(express.json());
-app.use(cookieParser());
+app.use(express.json());      // Parse JSON bodies
+app.use(cookieParser());      // Parse cookies
 
-// Serve static files when deployed
-app.use(express.static('public'));
+const port = 4000;            // Default port
 
-const port = process.argv.length > 2 ? process.argv[2] : 4000;
+// In-memory storage (Step 1)
+const users = []; // Stores registered users
+const posts = []; // Stores posts
 
-// Example endpoints
+// Test endpoint
 app.get('/api/hello', (req, res) => {
-  res.send({ message: 'Hello from your backend!' });
+  res.json({ message: 'Hello from backend!' });
 });
 
-// Example protected route
-app.get('/api/secure', (req, res) => {
-  res.status(401).send({ error: 'You must log in first' });
+// Get all posts
+app.get('/api/posts', (req, res) => {
+  res.json(posts);
 });
 
+// Create a post
+app.post('/api/posts', (req, res) => {
+  const { title, description, userName, image, requests } = req.body;
+  if (!title || !userName) {
+    return res.status(400).json({ error: 'Title and username are required' });
+  }
+
+  const newPost = {
+    id: uuidv4(),
+    title,
+    description: description || '',
+    userName,
+    image: image || '',
+    requests: requests || [],
+    proposals: [],
+  };
+
+  posts.push(newPost);
+  res.status(201).json(newPost);
+});
+
+// Start server
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`✅ Backend running on http://localhost:${port}`);
 });
