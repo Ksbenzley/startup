@@ -10,41 +10,41 @@ export function CreateAccount({ onAuthChange }) {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-const handleCreate = async (e) => {
-  e.preventDefault();
+  const handleCreate = async (e) => {
+    e.preventDefault();
 
-  if (password !== reenter) {
-    setError('Passwords do not match!');
-    return;
-  }
-
-  if (!username || !password) {
-    setError('Please fill out all fields.');
-    return;
-  }
-
-  try {
-    // Call your backend API to register
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-
-    if (res.ok) {
-      // Redirect to login page without authenticating yet
-      alert('Account created successfully! Please log in.');
-      window.location.href = '/'; // or use navigate('/') if using useNavigate
-    } else {
-      const data = await res.json();
-      setError(data.error || 'Registration failed');
+    if (password !== reenter) {
+      setError('Passwords do not match!');
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    setError('Error connecting to server');
-  }
-};
 
+    if (!username || !password) {
+      setError('Please fill out all fields.');
+      return;
+    }
+
+    try {
+      // Call backend API to register
+      const res = await fetch('http://localhost:4000/api/register', { // full backend URL
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+        credentials: 'include', // include cookies if needed
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Account created successfully! Please log in.');
+        navigate('/'); // redirect to login page
+      } else {
+        setError(data.error || 'Registration failed');
+      }
+    } catch (err) {
+      console.error('Error connecting to backend:', err);
+      setError('Error connecting to server');
+    }
+  };
 
   return (
     <main>

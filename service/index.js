@@ -4,10 +4,19 @@ import cookieParser from 'cookie-parser';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import { getUser, addUser, updateUser, userCollection } from './database.js';
+import cors from 'cors';
 
 const app = express();
+
+// --- Middleware ---
 app.use(express.json());
 app.use(cookieParser());
+
+// --- CORS middleware (for Vite frontend) ---
+app.use(cors({
+  origin: 'http://localhost:5173', // Vite dev server
+  credentials: true,               // Allow cookies to be sent
+}));
 
 const port = 4000;
 
@@ -71,7 +80,6 @@ app.post('/api/login', async (req, res) => {
   const validPassword = await bcrypt.compare(password, user.passwordHash);
   if (!validPassword) return res.status(401).json({ error: 'Invalid username or password' });
 
-  // Generate session token
   const token = uuidv4();
   await updateUser({ ...user, token });
 

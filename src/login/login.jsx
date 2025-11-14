@@ -44,10 +44,11 @@ export function Login({ onAuthChange }) {
     }
 
     try {
-      const res = await fetch('/api/login', {
+      const res = await fetch('http://localhost:4000/api/login', { // full backend URL
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password }),
+        credentials: 'include', // include cookies for session token
       });
 
       const data = await res.json();
