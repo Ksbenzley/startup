@@ -1,12 +1,13 @@
-import express from 'express';
+import { userCollection, addUser, getUser } from "./database.js";
 
-const app = express();
-const port = 4000;
+(async () => {
+  // Add a test user
+  await addUser({ username: "test", passwordHash: "hashedpassword123" });
 
-app.get('/', (req, res) => {
-  res.send('Hello world!');
-});
+  // Fetch the test user
+  const user = await getUser("test");
+  console.log(user);
 
-app.listen(port, () => {
-  console.log(`✅ Server running on http://localhost:${port}`);
-});
+  // Close the DB connection when done
+  process.exit(0);
+})();
