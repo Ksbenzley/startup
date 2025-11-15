@@ -44,7 +44,7 @@ export function Login({ onAuthChange }) {
     }
 
     try {
-      const res = await fetch('http://startup.jammix.click/api/login', { // full backend URL
+      const res = await fetch('https://startup.jammix.click/api/login', { // full backend URL
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password }),
