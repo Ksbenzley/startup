@@ -12,10 +12,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// --- CORS middleware (for Vite frontend) ---
+// --- CORS configuration ---
+const frontendOrigin = process.env.NODE_ENV === 'production'
+  ? 'https://jammix.click'    // your production frontend
+  : 'http://localhost:5173';  // local Vite dev server
+
 app.use(cors({
-  origin: 'http://localhost:5173', // Vite dev server
-  credentials: true,               // Allow cookies to be sent
+  origin: frontendOrigin,
+  credentials: true, // allow cookies to be sent
 }));
 
 const port = 4000;
@@ -83,7 +87,13 @@ app.post('/api/login', async (req, res) => {
   const token = uuidv4();
   await updateUser({ ...user, token });
 
-  res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
+  // Secure cookie in production
+  res.cookie('token', token, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+  });
+
   res.json({ message: 'Login successful' });
 });
 
