@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // --- CORS configuration ---
 const frontendOrigin = process.env.NODE_ENV === 'production'
-  ? 'https://startup.jammix.click'    // your production frontend
+  ? 'https://jammix.click'    // your production frontend
   : 'http://localhost:5173';  // local Vite dev server
 
 app.use(cors({
