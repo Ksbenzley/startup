@@ -4,7 +4,6 @@ import './profileStyle.css';
 export function Profile({ userName }) {
   const [posts, setPosts] = useState([]);
 
-  // Fetch all posts from the backend
   useEffect(() => {
     const loadPosts = async () => {
       try {
@@ -27,7 +26,7 @@ export function Profile({ userName }) {
     loadPosts();
   }, []);
 
-  // Only show posts created by the logged-in user
+  // Posts created by logged-in user
   const userPosts = posts.filter(post => post.userName === userName);
 
   return (
@@ -37,44 +36,52 @@ export function Profile({ userName }) {
       )}
 
       <div className="wrapper">
-        {userPosts.map((post) => (
-          <div key={post._id || post.id} className="explorePost">
-            <h3>{post.title} by {post.userName}</h3>
+        {userPosts.map((post) => {
+          const imgUrl = post.imageId
+            ? `${import.meta.env.VITE_API_URL}/api/posts/${post._id}/image`
+            : null;
 
-            <div className="media-section">
-              {/* Image/audio disabled until upload system is added */}
-              {post.image && (
-                <img
-                  src={post.image}
-                  alt={`${post.title} cover`}
-                />
+          const audioUrl = post.audioId
+            ? `${import.meta.env.VITE_API_URL}/api/posts/${post._id}/audio`
+            : null;
+
+          return (
+            <div key={post._id} className="explorePost">
+              <h3>{post.title} by {post.userName}</h3>
+
+              <div className="media-section">
+                {imgUrl && (
+                  <img
+                    src={imgUrl}
+                    alt={`${post.title} cover`}
+                  />
+                )}
+
+                <div className="play-buttons">
+                  {audioUrl && (
+                    <audio controls src={audioUrl}></audio>
+                  )}
+                </div>
+              </div>
+
+              <p>{post.description}</p>
+
+              {post.instruments && post.instruments.length > 0 && (
+                <>
+                  <h4>Requests:</h4>
+                  <ul>
+                    {post.instruments.map((instr) => (
+                      <li key={instr}>{instr}</li>
+                    ))}
+                  </ul>
+                </>
               )}
 
-              <div className="play-buttons">
-                {post.audio && (
-                  <audio controls src={post.audio}></audio>
-                )}
-              </div>
+              <button type="button">Proposals</button>
             </div>
-
-            <p>{post.description}</p>
-
-            {post.instruments && post.instruments.length > 0 && (
-              <>
-                <h4>Requests:</h4>
-                <ul>
-                  {post.instruments.map((instr) => (
-                    <li key={instr}>{instr}</li>
-                  ))}
-                </ul>
-              </>
-            )}
-
-            <button type="button">Proposals</button>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </main>
   );
 }
-

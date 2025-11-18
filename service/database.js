@@ -4,14 +4,18 @@ import fs from "fs";
 import path from "path";
 
 // --- Load DB credentials safely ---
-const configPath = path.resolve('./dbConfig.json'); // adjust if needed
+const configPath = path.resolve('./dbConfig.json'); 
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 
 // --- Connect to MongoDB ---
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('startup');  // replace 'startup' with your DB name
-const userCollection = db.collection('user');
+
+const db = client.db('startup');  // keep your DB name
+
+// --- Collections ---
+const userCollection = db.collection('user');       // users
+const postsCollection = db.collection('posts');     // NEW: posts collection
 
 // --- Test DB connection ---
 (async () => {
@@ -40,5 +44,14 @@ async function updateUser(user) {
   );
 }
 
-// --- Export for backend usage ---
-export { client, db, userCollection, getUser, addUser, updateUser };
+// --- Export everything backend needs ---
+export { 
+  client, 
+  db, 
+  userCollection, 
+  postsCollection,   // <-- this fixes your error
+  getUser, 
+  addUser, 
+  updateUser 
+};
+

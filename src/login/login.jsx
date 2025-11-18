@@ -44,7 +44,9 @@ export function Login({ onAuthChange }) {
     }
 
     try {
-      const res = await fetch('https://startup.jammix.click/api/login', { // full backend URL
+      //const res = await fetch('https://startup.jammix.click/api/login', { // full backend URL
+      //const res = await fetch('http://localhost:5173/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: userName, password }),

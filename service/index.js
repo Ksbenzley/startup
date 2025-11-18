@@ -3,8 +3,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
-import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
 import cors from 'cors';
+import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
 
 const app = express();
 
@@ -12,36 +12,32 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// --- CORS configuration ---
+// --- CORS ---
 const frontendOrigin = process.env.NODE_ENV === 'production'
   ? 'https://jammix.click'
   : 'http://localhost:5173';
 
-app.use(cors({
-  origin: frontendOrigin,
-  credentials: true,
-}));
+app.use(cors({ origin: frontendOrigin, credentials: true }));
+
+// --- Serve static files ---
+app.use(express.static('public'));
 
 const port = 4000;
 
-app.use(express.static('public'));
-
-// --- TEST ENDPOINT ---
+// --- Test endpoint ---
 app.get('/api/hello', (_req, res) => {
   res.json({ message: 'Hello from backend!' });
 });
 
-// -----------------------------
-//       POSTS ENDPOINTS
-// -----------------------------
+// --- POSTS ---
 
-// Get all posts (persistent)
+// Get all posts
 app.get('/api/posts', async (_req, res) => {
   const allPosts = await postsCollection.find().toArray();
   res.json(allPosts);
 });
 
-// Create a new post (persistent)
+// Create a post
 app.post('/api/posts', async (req, res) => {
   const { title, description, userName, instruments } = req.body;
 
@@ -59,23 +55,17 @@ app.post('/api/posts', async (req, res) => {
   };
 
   await postsCollection.insertOne(newPost);
-
   res.status(201).json(newPost);
 });
 
-// -----------------------------
-//     USER AUTHENTICATION
-// -----------------------------
+// --- USER AUTH ---
 
-// Register
 app.post('/api/register', async (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password)
-    return res.status(400).json({ error: 'Username and password required' });
+  if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
 
   const existingUser = await getUser(username);
-  if (existingUser)
-    return res.status(400).json({ error: 'Username already exists' });
+  if (existingUser) return res.status(400).json({ error: 'Username already exists' });
 
   const passwordHash = await bcrypt.hash(password, 10);
   await addUser({ username, passwordHash, token: null });
@@ -83,7 +73,6 @@ app.post('/api/register', async (req, res) => {
   res.status(201).json({ message: 'User registered successfully' });
 });
 
-// Login
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   const user = await getUser(username);
@@ -96,16 +85,10 @@ app.post('/api/login', async (req, res) => {
   const token = uuidv4();
   await updateUser({ ...user, token });
 
-  res.cookie('token', token, {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-  });
-
+  res.cookie('token', token, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' });
   res.json({ message: 'Login successful' });
 });
 
-// Logout
 app.post('/api/logout', async (req, res) => {
   const token = req.cookies.token;
   if (token) {
@@ -116,7 +99,6 @@ app.post('/api/logout', async (req, res) => {
   res.json({ message: 'Logged out' });
 });
 
-// Restricted
 app.get('/api/secret', async (req, res) => {
   const token = req.cookies.token;
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
@@ -127,12 +109,10 @@ app.get('/api/secret', async (req, res) => {
   res.json({ message: `Welcome, ${user.username}! This is a secret.` });
 });
 
-// Catch-all for frontend
+// --- Catch-all frontend ---
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-// Start server
-app.listen(port, () => {
-  console.log(`✅ Backend running on http://localhost:${port}`);
-});
+// --- Start server ---
+app.listen(port, () => console.log(`✅ Backend running on http://localhost:${port}`));
