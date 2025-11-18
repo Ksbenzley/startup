@@ -125,7 +125,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Stores data in MongoDB** - I completed this part
+- [x] **Stores data in MongoDB** - I store post information on both the profile and the explore page
 - [x] **Stores credentials in MongoDB** - I store passwords and usernames in mongodb
 
 ## 🚀 WebSocket deliverable
