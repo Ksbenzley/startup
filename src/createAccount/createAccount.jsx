@@ -25,9 +25,9 @@ export function CreateAccount({ onAuthChange }) {
 
     try {
       // Call backend API to register
-      //const res = await fetch('https://startup.jammix.click/api/register', { // full backend URL
+      const res = await fetch('https://startup.jammix.click/api/register', { // full backend URL
       //const res = await fetch('http://localhost:5173/createAccount', {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
+      //const res = await fetch(`${import.meta.env.VITE_API_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

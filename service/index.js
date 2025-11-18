@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 // --- CORS ---
 const frontendOrigin = process.env.NODE_ENV === 'production'
-  ? 'https://jammix.click'
+  ? 'https://startup.jammix.click'
   : 'http://localhost:5173';
 
 app.use(cors({ origin: frontendOrigin, credentials: true }));
