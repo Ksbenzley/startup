@@ -17,29 +17,48 @@ export function Create({ onNewPost, currentUserName }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newPost = {
       title,
-      imageFile,
-      audioFile,
       description,
       instruments,
       userName: currentUserName,
     };
 
-    if (onNewPost) {
-      onNewPost(newPost);
-    }
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/posts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newPost),
+        credentials: 'include',
+      });
 
-    // Reset form
-    setTitle('');
-    setImageFile(null);
-    setAudioFile(null);
-    setDescription('');
-    setInstruments([]);
+      if (!res.ok) {
+        throw new Error('Failed to save post');
+      }
+
+      const saved = await res.json();
+
+      if (onNewPost) {
+        onNewPost({ ...newPost, _id: saved.id });
+      }
+
+      // Reset the form
+      setTitle('');
+      setImageFile(null);
+      setAudioFile(null);
+      setDescription('');
+      setInstruments([]);
+
+    } catch (err) {
+      console.error('Error saving post:', err);
+    }
   };
+
 
   return (
     <main>
