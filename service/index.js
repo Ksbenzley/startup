@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
+import http from 'http';
+import { peerProxy } from './peerProxy.js';
 
 const app = express();
 
@@ -115,4 +117,8 @@ app.use((_req, res) => {
 });
 
 // --- Start server ---
-app.listen(port, () => console.log(`✅ Backend running on http://localhost:${port}`));
+const server = http.createServer(app);
+
+peerProxy(server);
+
+server.listen(port, () => console.log(`✅ Backend running on http://localhost:${port}`));
