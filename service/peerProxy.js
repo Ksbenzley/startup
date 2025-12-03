@@ -24,18 +24,21 @@ export function peerProxy(httpServer) {
     });
   });
 
-  // Periodically send out a ping message to make sure clients are alive
-  setInterval(() => {
+  // Periodically ping clients to check if they are alive
+  const interval = setInterval(() => {
     socketServer.clients.forEach((client) => {
-      if (client.isAlive === false) return client.terminate();
+      if (!client.isAlive) return client.terminate();
 
       client.isAlive = false;
       client.ping();
     });
   }, 10000);
+
+  // Clean up interval if the server closes
+  socketServer.on('close', () => clearInterval(interval));
 }
 
-// --- helper function to broadcast messages to all connected clients ---
+// --- Helper function to broadcast messages to all connected clients ---
 export function broadcastMessage(msg) {
   if (!socketServer) return;
   socketServer.clients.forEach((client) => {

@@ -66,7 +66,6 @@ app.post('/api/posts', async (req, res) => {
   res.status(201).json(newPost);
 });
 
-
 // --- USER AUTH ---
 
 app.post('/api/register', async (req, res) => {
@@ -126,6 +125,7 @@ app.use((_req, res) => {
 // --- Start server ---
 const server = http.createServer(app);
 
+// Attach WebSocket server
 peerProxy(server);
 
 server.listen(port, () => console.log(`✅ Backend running on http://localhost:${port}`));

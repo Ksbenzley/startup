@@ -18,8 +18,6 @@ import { Explore } from './explore/explore';
 import { Login } from './login/login';
 import { Profile } from './profile/profile';
 
-import { connectWebSocket, sendMessage } from './websocket'; // WebSocket helper
-
 // Single ProtectedRoute declaration
 function ProtectedRoute({ authState, children }) {
   if (authState !== AuthState.Authenticated) {
@@ -46,6 +44,7 @@ function AppContent() {
   );
   const [posts, setPosts] = useState([]);
   const [notifications, setNotifications] = useState([]);
+  const [socket, setSocket] = useState(null);
 
   const hideNavPages = ['/', '/createAccount'];
   const shouldHideNav = hideNavPages.includes(location.pathname);
@@ -82,9 +81,11 @@ function AppContent() {
 
   // --- WebSocket integration ---
   useEffect(() => {
+    // Adjust port or protocol as needed
     const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const wsUrl = `${wsProtocol}://${window.location.hostname}:4000`; // backend port
+    const wsUrl = `${wsProtocol}://${window.location.hostname}:4000`;
     const socket = new WebSocket(wsUrl);
+    setSocket(socket);
 
     socket.onopen = () => console.log('WebSocket connected!');
 
@@ -95,9 +96,10 @@ function AppContent() {
         // Try parsing as a post
         const parsed = JSON.parse(msg);
         setPosts((prev) => [...prev, parsed]);
+        showNotification(`${parsed.userName} made a post!`);
       } catch {
-        // If not JSON, treat as a notification
-        setNotifications((prev) => [...prev, msg]);
+        // If not JSON, treat as a general notification
+        showNotification(msg);
       }
     };
 
@@ -107,14 +109,37 @@ function AppContent() {
     return () => socket.close();
   }, []);
 
-  // Optional: Send a test message
-  const handleSendTest = () => {
-    const msg = JSON.stringify({
-      title: 'Test WebSocket Message',
-      userName: userName || 'Guest',
-      createdAt: new Date(),
-    });
-    sendMessage(msg);
+  // --- Notifications helper ---
+  const showNotification = (msg) => {
+    setNotifications((prev) => [...prev, msg]);
+    setTimeout(() => {
+      setNotifications((prev) => prev.filter((n) => n !== msg));
+    }, 5000); // auto-remove after 5s
+  };
+
+  // Optional: Send a test message via backend POST to broadcast
+  const handleSendTest = async () => {
+    if (!userName) return alert('You must be logged in to send a test message.');
+
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'Test WebSocket Message',
+          userName: userName,
+        }),
+      });
+
+      if (res.ok) {
+        showNotification('Test post sent!');
+      } else {
+        alert('Failed to send test message.');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Error sending test message.');
+    }
   };
 
   return (
@@ -160,7 +185,7 @@ function AppContent() {
         )}
       </header>
 
-      {/* --- Display notifications --- */}
+      {/* --- Notifications under header --- */}
       {notifications.length > 0 && (
         <div className="notifications">
           {notifications.map((note, idx) => (
@@ -223,7 +248,6 @@ function AppContent() {
     </div>
   );
 }
-
 
 function NotFound() {
   return (

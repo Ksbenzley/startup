@@ -39,7 +39,7 @@ footer {
     box-sizing: border-box;
 }
 
-footer p{
+footer p {
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -48,4 +48,53 @@ footer p{
     padding: 15px 25px;
     width: 100%;
     box-sizing: border-box;
+}
+
+/* --- Notifications --- */
+.notifications {
+    position: fixed; /* floating over the page */
+    top: 120px; /* under the header */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.notification {
+    background-color: #444;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+    opacity: 0.95;
+    transition: all 0.3s ease;
+    min-width: 250px;
+    text-align: center;
+}
+
+/* Fade-in animation */
+.notification-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.notification-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+/* Fade-out animation */
+.notification-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
 }
