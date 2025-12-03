@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
 import { AuthState } from './login/authState';
@@ -17,6 +17,8 @@ import { CreateAccount } from './createAccount/createAccount';
 import { Explore } from './explore/explore';
 import { Login } from './login/login';
 import { Profile } from './profile/profile';
+
+import { connectWebSocket, sendMessage } from './websocket'; // WebSocket helper
 
 // Single ProtectedRoute declaration
 function ProtectedRoute({ authState, children }) {
@@ -43,10 +45,12 @@ function AppContent() {
     userName ? AuthState.Authenticated : AuthState.Unauthenticated
   );
   const [posts, setPosts] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
   const hideNavPages = ['/', '/createAccount'];
   const shouldHideNav = hideNavPages.includes(location.pathname);
 
+  // --- Handle authentication changes ---
   const onAuthChange = (user, newAuthState) => {
     setUserName(user);
     setAuthState(newAuthState);
@@ -63,12 +67,8 @@ function AppContent() {
   const handleLogout = async () => {
     try {
       const res = await fetch('/api/logout', { method: 'POST' });
-      if (res.ok) {
-        onAuthChange('', AuthState.Unauthenticated);
-      } else {
-        console.error('Logout failed');
-        alert('Logout failed');
-      }
+      if (res.ok) onAuthChange('', AuthState.Unauthenticated);
+      else alert('Logout failed');
     } catch (err) {
       console.error('Error connecting to backend:', err);
       alert('Error connecting to server');
@@ -78,6 +78,43 @@ function AppContent() {
   const addPost = (newPost) => {
     setPosts([...posts, newPost]);
     navigate('/profile');
+  };
+
+  // --- WebSocket integration ---
+  useEffect(() => {
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+    const wsUrl = `${wsProtocol}://${window.location.hostname}:4000`; // backend port
+    const socket = new WebSocket(wsUrl);
+
+    socket.onopen = () => console.log('WebSocket connected!');
+
+    socket.onmessage = (event) => {
+      const msg = event.data;
+
+      try {
+        // Try parsing as a post
+        const parsed = JSON.parse(msg);
+        setPosts((prev) => [...prev, parsed]);
+      } catch {
+        // If not JSON, treat as a notification
+        setNotifications((prev) => [...prev, msg]);
+      }
+    };
+
+    socket.onclose = () => console.log('WebSocket disconnected');
+    socket.onerror = (err) => console.error('WebSocket error:', err);
+
+    return () => socket.close();
+  }, []);
+
+  // Optional: Send a test message
+  const handleSendTest = () => {
+    const msg = JSON.stringify({
+      title: 'Test WebSocket Message',
+      userName: userName || 'Guest',
+      createdAt: new Date(),
+    });
+    sendMessage(msg);
   };
 
   return (
@@ -123,6 +160,17 @@ function AppContent() {
         )}
       </header>
 
+      {/* --- Display notifications --- */}
+      {notifications.length > 0 && (
+        <div className="notifications">
+          {notifications.map((note, idx) => (
+            <div key={idx} className="notification">
+              {note}
+            </div>
+          ))}
+        </div>
+      )}
+
       <Routes>
         <Route
           path="/"
@@ -134,6 +182,9 @@ function AppContent() {
           element={
             <ProtectedRoute authState={authState}>
               <Explore posts={posts} />
+              <button onClick={handleSendTest} style={{ marginTop: '10px' }}>
+                Send Test Message
+              </button>
             </ProtectedRoute>
           }
         />
@@ -172,6 +223,7 @@ function AppContent() {
     </div>
   );
 }
+
 
 function NotFound() {
   return (

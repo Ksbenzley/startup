@@ -11,11 +11,11 @@ const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 
-const db = client.db('startup');  // keep your DB name
+const db = client.db('startup');  
 
 // --- Collections ---
-const userCollection = db.collection('user');       // users
-const postsCollection = db.collection('posts');     // NEW: posts collection
+const userCollection = db.collection('user');       
+const postsCollection = db.collection('posts');     
 
 // --- Test DB connection ---
 (async () => {
@@ -49,7 +49,7 @@ export {
   client, 
   db, 
   userCollection, 
-  postsCollection,   // <-- this fixes your error
+  postsCollection, 
   getUser, 
   addUser, 
   updateUser 

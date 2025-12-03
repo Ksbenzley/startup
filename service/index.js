@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
 import http from 'http';
-import { peerProxy } from './peerProxy.js';
+import { peerProxy, broadcastMessage } from './peerProxy.js';
 
 const app = express();
 
@@ -56,9 +56,16 @@ app.post('/api/posts', async (req, res) => {
     createdAt: new Date(),
   };
 
+  // Insert the post into the database
   await postsCollection.insertOne(newPost);
+
+  // --- WebSocket notification to all connected clients ---
+  broadcastMessage(`${userName} made a post!`);
+
+  // Respond to the client who created the post
   res.status(201).json(newPost);
 });
+
 
 // --- USER AUTH ---
 
