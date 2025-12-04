@@ -1,74 +1,53 @@
-// service/index.js
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcryptjs';
-import cors from 'cors';
-import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
 import http from 'http';
+import { getUser, addUser, updateUser, userCollection, postsCollection } from './database.js';
 import { peerProxy, broadcastMessage } from './peerProxy.js';
 
 const app = express();
+const authCookieName = 'token';
+const PORT = process.env.PORT || 4000;
 
 // --- Middleware ---
 app.use(express.json());
 app.use(cookieParser());
 
-// --- CORS ---
-const frontendOrigin = process.env.NODE_ENV === 'production'
-  ? 'https://startup.jammix.click'
-  : 'http://localhost:5173';
-
-app.use(cors({ origin: frontendOrigin, credentials: true }));
-
 // --- Serve static files ---
 app.use(express.static('public'));
 
-const port = 4000;
-
-// --- Test endpoint ---
-app.get('/api/hello', (_req, res) => {
-  res.json({ message: 'Hello from backend!' });
-});
+// --- API Router ---
+const apiRouter = express.Router();
+app.use('/api', apiRouter);
 
 // --- POSTS ---
-
-// Get all posts
-app.get('/api/posts', async (_req, res) => {
+apiRouter.get('/posts', async (_req, res) => {
   const allPosts = await postsCollection.find().toArray();
   res.json(allPosts);
 });
 
-// Create a post
-app.post('/api/posts', async (req, res) => {
-  const { title, description, userName, instruments } = req.body;
-
-  if (!title || !userName) {
-    return res.status(400).json({ error: 'Title and username are required' });
-  }
+apiRouter.post('/posts', async (req, res) => {
+  const { title, userName } = req.body;
+  if (!title || !userName) return res.status(400).json({ error: 'Title and username required' });
 
   const newPost = {
     id: uuidv4(),
     title,
-    description: description || '',
     userName,
-    instruments: instruments || [],
     createdAt: new Date(),
   };
 
-  // Insert the post into the database
   await postsCollection.insertOne(newPost);
 
-  // --- WebSocket notification to all connected clients ---
-  broadcastMessage(`${userName} made a post!`);
+  // Broadcast via WebSocket
+  broadcastMessage(JSON.stringify(newPost));
 
-  // Respond to the client who created the post
   res.status(201).json(newPost);
 });
 
 // --- USER AUTH ---
-
-app.post('/api/register', async (req, res) => {
+apiRouter.post('/register', async (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
 
@@ -81,7 +60,7 @@ app.post('/api/register', async (req, res) => {
   res.status(201).json({ message: 'User registered successfully' });
 });
 
-app.post('/api/login', async (req, res) => {
+apiRouter.post('/login', async (req, res) => {
   const { username, password } = req.body;
   const user = await getUser(username);
 
@@ -93,39 +72,25 @@ app.post('/api/login', async (req, res) => {
   const token = uuidv4();
   await updateUser({ ...user, token });
 
-  res.cookie('token', token, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' });
+  res.cookie(authCookieName, token, { httpOnly: true, sameSite: 'lax' });
   res.json({ message: 'Login successful' });
 });
 
-app.post('/api/logout', async (req, res) => {
-  const token = req.cookies.token;
+apiRouter.post('/logout', async (req, res) => {
+  const token = req.cookies[authCookieName];
   if (token) {
     const user = await userCollection.findOne({ token });
     if (user) await updateUser({ ...user, token: null });
   }
-  res.clearCookie('token');
+  res.clearCookie(authCookieName);
   res.json({ message: 'Logged out' });
 });
 
-app.get('/api/secret', async (req, res) => {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ error: 'Unauthorized' });
-
-  const user = await userCollection.findOne({ token });
-  if (!user) return res.status(401).json({ error: 'Unauthorized' });
-
-  res.json({ message: `Welcome, ${user.username}! This is a secret.` });
-});
-
 // --- Catch-all frontend ---
-app.use((_req, res) => {
-  res.sendFile('index.html', { root: 'public' });
-});
+app.use((_req, res) => res.sendFile('index.html', { root: 'public' }));
 
-// --- Start server ---
+// --- Start HTTP + WebSocket server ---
 const server = http.createServer(app);
-
-// Attach WebSocket server
 peerProxy(server);
 
-server.listen(port, () => console.log(`✅ Backend running on http://localhost:${port}`));
+server.listen(PORT, () => console.log(`✅ HTTP + WS running on http://localhost:${PORT}`));

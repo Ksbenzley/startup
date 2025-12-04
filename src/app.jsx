@@ -79,34 +79,27 @@ function AppContent() {
     navigate('/profile');
   };
 
-  // --- WebSocket integration ---
+  // --- WebSocket setup ---
   useEffect(() => {
-    // Adjust port or protocol as needed
     const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-    const wsUrl = `${wsProtocol}://${window.location.hostname}:4000`;
-    const socket = new WebSocket(wsUrl);
-    setSocket(socket);
+    const wsUrl = `${wsProtocol}://${window.location.host}`;
+    const ws = new WebSocket(wsUrl);
+    setSocket(ws);
 
-    socket.onopen = () => console.log('WebSocket connected!');
-
-    socket.onmessage = (event) => {
-      const msg = event.data;
-
+    ws.onopen = () => console.log('WebSocket connected!');
+    ws.onmessage = (event) => {
       try {
-        // Try parsing as a post
-        const parsed = JSON.parse(msg);
+        const parsed = JSON.parse(event.data);
         setPosts((prev) => [...prev, parsed]);
         showNotification(`${parsed.userName} made a post!`);
       } catch {
-        // If not JSON, treat as a general notification
-        showNotification(msg);
+        showNotification(event.data);
       }
     };
+    ws.onclose = () => console.log('WebSocket disconnected');
+    ws.onerror = (err) => console.error('WebSocket error:', err);
 
-    socket.onclose = () => console.log('WebSocket disconnected');
-    socket.onerror = (err) => console.error('WebSocket error:', err);
-
-    return () => socket.close();
+    return () => ws.close();
   }, []);
 
   // --- Notifications helper ---
@@ -125,17 +118,11 @@ function AppContent() {
       const res = await fetch('/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          title: 'Test WebSocket Message',
-          userName: userName,
-        }),
+        body: JSON.stringify({ title: 'Test WebSocket Message', userName }),
       });
 
-      if (res.ok) {
-        showNotification('Test post sent!');
-      } else {
-        alert('Failed to send test message.');
-      }
+      if (res.ok) showNotification('Test post sent!');
+      else alert('Failed to send test message.');
     } catch (err) {
       console.error(err);
       alert('Error sending test message.');
@@ -154,19 +141,13 @@ function AppContent() {
           <nav className="navigationBar">
             <menu className="navbar-nav d-flex flex-row gap-3">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/explore">
-                  Explore
-                </NavLink>
+                <NavLink className="nav-link" to="/explore">Explore</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/create">
-                  Create
-                </NavLink>
+                <NavLink className="nav-link" to="/create">Create</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/profile">
-                  Profile
-                </NavLink>
+                <NavLink className="nav-link" to="/profile">Profile</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink
@@ -189,9 +170,7 @@ function AppContent() {
       {notifications.length > 0 && (
         <div className="notifications">
           {notifications.map((note, idx) => (
-            <div key={idx} className="notification">
-              {note}
-            </div>
+            <div key={idx} className="notification">{note}</div>
           ))}
         </div>
       )}
@@ -256,3 +235,4 @@ function NotFound() {
     </main>
   );
 }
+
