@@ -167,9 +167,6 @@ function AppContent() {
           element={
             <ProtectedRoute authState={authState}>
               <Explore posts={posts} />
-              <button onClick={handleSendTest} style={{ marginTop: '10px' }}>
-                Send Test Message
-              </button>
             </ProtectedRoute>
           }
         />
