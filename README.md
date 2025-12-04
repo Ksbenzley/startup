@@ -132,8 +132,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - My file peerProxy.js hosts the backend of my websocket
+- [x] **Frontend makes WebSocket connection** - My app.jsx hosts the front end of my websocket stuff and makes sure the connection works
+- [ ] **Data sent over WebSocket connection** - When any user makes a post, every other user online gets a notification with their username which says "User made a post", obviously replacing the word 'user' with the actual username.
+- [x] **WebSocket data displayed** - A pop up appears just below the title on any page that you are on and disappears after a few seconds.
+- [x] **Application is fully functional** - My Application is fully functional.

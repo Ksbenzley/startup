@@ -110,25 +110,6 @@ function AppContent() {
     }, 5000); // auto-remove after 5s
   };
 
-  // Optional: Send a test message via backend POST to broadcast
-  const handleSendTest = async () => {
-    if (!userName) return alert('You must be logged in to send a test message.');
-
-    try {
-      const res = await fetch('/api/posts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: 'Test WebSocket Message', userName }),
-      });
-
-      if (res.ok) showNotification('Test post sent!');
-      else alert('Failed to send test message.');
-    } catch (err) {
-      console.error(err);
-      alert('Error sending test message.');
-    }
-  };
-
   return (
     <div>
       <header className="container-fluid">
